@@ -49,13 +49,52 @@ class ClientController extends Controller
    
     public function show(string $id)
     {
-        //
+        //mosttando um cliente especifico
+
+        $client = Client::find($id);
+        if (!$client) {
+            return response()->json(['message' => 'Cliente não encontrado'], 404);
+        }else {
+            return response()->json($client, 200);
+        }
+
     }
 
     
     public function update(Request $request, string $id)
     {
-        //
+        //validando a requisição 
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:clients,email'.$id,
+            'phone' => 'required',
+        ]);
+
+        //atualizando um cliente especifico
+        $client = Client::find($id);
+
+        if ($client) {
+
+            $client->update($request->all());
+
+            return response()->json([
+                'message' => 'Cliente atualizado com sucesso',
+                'data' => $client
+            ], 200);
+
+           
+
+        }else {
+
+         
+
+             return response()->json(['message' => 'Cliente não encontrado'], 404);
+        }    
+
+
+
+
+
     }
 
    

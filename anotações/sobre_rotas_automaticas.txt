@@ -41,6 +41,12 @@ para essa rota
  
     http://localhost/laravel_api_com_sanctum/public/api/clients
 
+Buscando detalhes de um cliente especifico no caso eu so preciso colocar o id no final da rota 
+
+    http://localhost/laravel_api_com_sanctum/public/api/clients/1
+
+
+
 
 
      
