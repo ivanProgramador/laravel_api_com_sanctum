@@ -1,0 +1,3 @@
+No contexto desse projeto eu estou usando cliente consumidor mas esse consumidor 
+pode ser um sistema ou vários sistemas, no caso desse projeto eu vou criar uma tabela
+de clientes parar testar o sanctum.    

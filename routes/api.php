@@ -3,7 +3,11 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:sanctum');
-
+Route::get('/status',function(){
+    return response()->json(
+        [
+            'status' => 'ok',
+            'message' => 'API funcionando'
+        ],200
+    );
+});

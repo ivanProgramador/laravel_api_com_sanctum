@@ -1,3 +1,12 @@
 php artisan install:api
 php artisan make:seeder UserSeeder 
 php artisan db:seed --class=UserSeeder
+php artisan route:list 
+php artisan make:migration create_clients_table
+
+//a diretiva -f  na frete do model cria uma factory pra ele
+ 
+php artisan make:model Client -f
+
+
+
