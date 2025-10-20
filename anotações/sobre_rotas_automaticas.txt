@@ -1,0 +1,31 @@
+No caso quando eu crio uma rota especifica para api 
+dessa forma:
+
+  Route::apiResource('clients', ClientController::class);
+
+O laravel gera rotas automaticas com base no ClientController para 
+onde essa rota aponta ele gera uma para cada metodo tanto as rotas post 
+quato as rotas get. 
+
+  GET|HEAD        / ..............................................................................................  
+  GET|HEAD        api/clients ............................................. clients.index › ClientController@index  
+  POST            api/clients ............................................. clients.store › ClientController@store  
+  GET|HEAD        api/clients/{client} ...................................... clients.show › ClientController@show  
+  PUT|PATCH       api/clients/{client} .................................. clients.update › ClientController@update  
+  DELETE          api/clients/{client} ................................ clients.destroy › ClientController@destroy  
+  GET|HEAD        api/status .....................................................................................  
+  GET|HEAD        sanctum/csrf-cookie .......... sanctum.csrf-cookie › Laravel\Sanctum › CsrfCookieController@show  
+  GET|HEAD        storage/{path} ................................................................... storage.local  
+  GET|HEAD        up .............................................................................................  
+
+Mas essas rotas não ficam expostas no arquivo api.php então para visualizar elas o comando é 
+    
+    php artisan route:list 
+
+para fazer um requisição pra rota get que traz todo os clientes no insominia eu fiz dessa forma:
+
+   http://localhost/laravel_api_com_sanctum/public/api/clients
+
+
+
+     
