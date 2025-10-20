@@ -26,6 +26,21 @@ para fazer um requisição pra rota get que traz todo os clientes no insominia e
 
    http://localhost/laravel_api_com_sanctum/public/api/clients
 
+para cadastrar um cliente eu usei essa requisição, embora a assinatura seja a mesma, caso eu precise cadastrar 
+eu tenho que mudar o verbo http parara post no insominia e mandar um json no body da requisição 
+
+mandei esse json 
+
+   {
+	    "name":"jose",
+      "email":"jose@mail.com",
+      "phone":"8566997744"
+   }
+
+para essa rota 
+ 
+    http://localhost/laravel_api_com_sanctum/public/api/clients
+
 
 
      
