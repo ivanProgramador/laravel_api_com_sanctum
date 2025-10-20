@@ -66,7 +66,7 @@ class ClientController extends Controller
         //validando a requisição 
         $request->validate([
             'name' => 'required',
-            'email' => 'required|email|unique:clients,email'.$id,
+            'email' => 'required|email|unique:clients,email,'.$id,
             'phone' => 'required',
         ]);
 
@@ -85,8 +85,6 @@ class ClientController extends Controller
            
 
         }else {
-
-         
 
              return response()->json(['message' => 'Cliente não encontrado'], 404);
         }    
