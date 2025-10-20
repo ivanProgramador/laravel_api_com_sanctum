@@ -1,0 +1,24 @@
+É um framework de autenticação e autorização.
+  Ele pode ser usado parara gerenciar o acesso a recursos da api atraves do uso de tokens.
+  para instalar o sanctum esse comando basta "php artisan install:api" porém é preciso entender
+  que esse comando vai fazer alterações em algumas configurações do projeto. 
+
+  1 - ele vai alterar o arquivo "app.php"  incluindo variavel api e poantando para api.php 
+  2 - ele vai gerar o api.php com uma rota padraão que ja usa o middleware dele 
+  3 - vai criar uma migration 2025_10_20_031111_create_personal_access_tokens_table.php 
+  4 - ataualizar os jsons do composer com as configurações dele 
+
+  mas tem auma lateração importante que ele não consegue fazer sozinho e ela tem que ser feita 
+  para que ele possa funcionar.
+
+  1 - No model "User" tem que colocar esse namespace "use Laravel\Sanctum\HasApiTokens;"
+  2 - E na classe tem que adcionar o "HasApiTokens" junto com trate que ja existem dessa forma
+
+      use HasFactory, Notifiable,HasApiTokens; 
+
+  
+
+  
+    
+
+  
