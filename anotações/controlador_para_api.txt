@@ -1,0 +1,10 @@
+Para criar um controlador feito especificamente para apis o comando usado deve ser 
+
+   php artisan make:controller ClientController --api 
+
+A diferença e que ele ja vem com os metodos criados com isso basta implantar as logicas neles. 
+
+Em relação rotas para o ClientController se eu criar dessa forma ele ja constroi todas as rotas baseadas nos metodos
+
+  Route::apiResource('clients', ClientController::class);
+
