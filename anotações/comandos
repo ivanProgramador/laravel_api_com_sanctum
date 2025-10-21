@@ -12,5 +12,7 @@ php artisan make:model Client -f
 
 php artisan make:controller ClientController --api
 
+php artisan make:controller AuthController
+
 
 

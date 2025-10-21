@@ -16,6 +16,57 @@
 
       use HasFactory, Notifiable,HasApiTokens; 
 
+  Fazendo o login com o sanctum 
+
+    O primeiro passo foi criar um controller de autenticação que terá o metodo de login, esse metodo 
+    sera responsavel por pegar os dado da requisição "email e password" e validar para saber se eles  
+    existem dentdo da reuisição e se eles correpondem as condições de validação 
+
+    //validando os dados 
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required'
+        ]);
+
+    se eles não estiverem dentro dos padrões a atenticação não vai deixar passar, mas se sim, 
+    vai aocntecer uma tentaiva de login,a conbinação de email e asenha sera comparada a base de dados
+    se esse combinação existir o attempt será preenchido com os dados    
+
+       $attempt = auth()->attempt([
+            'email' => $email,
+            'password' => $password
+        ]);
+
+    aqui eu tento se ele está vazio, se estiver a tentativa de login falhou, e eu retorno para o usuario,
+    que ele não tem autorização
+
+     if (!$attempt) {
+            return response()->json(['message' => 'Não aurtorizado'], 401);
+        }
+
+    agora se ele estiver preenchido o usuario vai pra dentro da função auth() indicando que ele está 
+    autenticado. 
+
+      $user = auth()->user();
+
+    aqui eu crio a avrivel token qevai opegar os dados do usuario e usar a função createToken do sanctum 
+    e gerar um token pra ele com base no nome do usuario 
+
+      $token = $user->createToken($user->name)->plainTextToken; 
+    
+    depois de criar op token eu tenho que mandar ele para o usuario 
+
+    return response()->json(['token' => $token]);
+
+    agora ele tem um token de login pra acessar a api 
+
+
+
+     
+
+
+  
+
   
 
   
