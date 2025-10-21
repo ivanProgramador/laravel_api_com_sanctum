@@ -1,0 +1,57 @@
+
+Estruturando as Respostas 
+
+Nesse projeto estou usando o sanctum para proteger o acesso a essa api, mas é importante ressaltar 
+um ponto, embora api´s não forneçam um ainterface grafica e importante se atentar sobre os padrões 
+de resposta, isso vai da maneira de responder a reuisição com o dado solicitado até a maneira de  
+avisar ao sistema que vai usar a api que ele não tem autorização de acesso. 
+
+Alguns sistema que possuem interfaces graficas as veze modelam suas interfaces com base nos padroes 
+de resposta da api, um exmplo seria os sistema de delivery que esperam os dados do cliente e a lista 
+de produtos do pedido.A estruturação nesse caso serve parar evitar que ao ives de receber um produto,
+na lista de produtos ele receba os dados do cliente, ou que ele receba no local de forma de pagamento,
+as observações do pedido, por isso é importante que seja seguido sempre um padrão de respostas para cada
+reequisição e resultado de requisição.
+
+aplicando na minha api
+
+dentro da pasta services eu criai um arquivo chamado ApiResponse.php dentro dela eu coloque uma classe chamda
+ApiResponse qua tem alguns metodos estaticos que eu vou retornar dependendo da situação.
+
+para respostas de sucesso 
+
+  public static function success($data):JsonResponse
+      {
+         return response()->json(
+            [
+               'status_code'=> 200,
+               'message' => 'success',
+               'data' => $data     
+            ],200
+        );
+      }
+
+ para problemas internos no servidor 
+
+      public static function error($message):JsonResponse
+      {
+         return response()->json(
+            [
+               'status_code'=> 500,
+               'message' => $message,    
+            ],500
+        );
+      }
+
+para acesso não autorizado 
+
+   public static function unauthorized():JsonResponse
+      {
+         return response()->json(
+            [
+               'status_code'=> 403,
+               'message' => 'sem autorização' 
+            ],403
+        );
+      }
+
