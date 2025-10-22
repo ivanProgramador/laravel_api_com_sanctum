@@ -1,0 +1,11 @@
+
+Proteger uma rota com consulta de abilities logo na requisição pode não funcionar, porque 
+o sanctum pode retornar um erro 
+
+"invalid ability provider "
+
+isso acontece não porque foi fornecida uma ability falsa ou incorreta mas por um erro interno do sistema
+então o mais funcional até aqui seria a cionar dentro do metodo como estava sendo feito antes  
+
+
+Route::get('/clients',[ClientController::class,'index'])->middleware(['auth:sanctum','ability:clients:list']);
