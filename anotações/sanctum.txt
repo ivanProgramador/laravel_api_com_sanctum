@@ -58,7 +58,45 @@
 
     return response()->json(['token' => $token]);
 
-    agora ele tem um token de login pra acessar a api 
+    agora ele tem um token de login pra acessar a api, sanctum basicamente é aplicado como um middleware nas rotas que ele protege 
+    dessa forma essa rota e todas as rotas que forma geradas por ela de foma automática passam ater o seu controle de acesso administrado
+    pelo sanctum.  
+
+    Route::apiResource('clients', ClientController::class)->middleware('auth:sanctum');
+
+    para fazer o login no sanctum primeiro precisa acessar a rota de login e enviar os dados via post 
+    com os dados do usuario via json 
+
+    {
+    	"email":"app_consumer_001@api.com",
+	    "password":"Aa123456"
+    }
+
+    para essa rota 
+
+     http://localhost/laravel_api_com_sanctum/public/api/login
+
+    então o sanctum vai responder com um token e com os dados do usuario que solicitou 
+
+     {
+	    "status_code": 200,
+	    "message": "success",
+	    "data": {
+		    "name": "AppConsumer0001",
+		    "email": "app_consumer_001@api.com",
+		    "token": "3|vsOtZmmoyVP5gdn7aUO6fxysUPCl4ggIh2aRIvm8706aeb78"
+	    }
+    }
+
+    Usando o token para ter acesso a api quando se usa um sistema como insominia ou postman 
+    tem um atributo de requisição chamado barrer é nesse campo que a chave da api é inserida 
+    para ser envida na requisição como foi o sanctum quem gerou a chave ele vai deixar passar 
+
+
+
+
+
+
 
     
 
