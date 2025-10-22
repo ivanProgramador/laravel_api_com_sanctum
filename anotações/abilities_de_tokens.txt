@@ -1,0 +1,58 @@
+Além de autenticar um usuario os tokens tambem podem controlar as permissões 
+que o dono do token possui.Isso é util em situções onde existem duas empresas
+consumindo uma api, mas o aplno da empresa 1 permite que ela liste e consulte 
+dados dos cadastros da api
+
+Empresa 1 
+  pode lista varios dados 
+  pode consultar os detalhes de um registro
+
+Empresa 2 
+  pode lista varios dados 
+  pode consultar os detalhes de um registro
+  pode cadastrar novos dados 
+  atualizar registros
+
+A empresa 1 e a empresa 2 são clientes com planos diferentes então os tokens 
+delas tem "abilities" diferebntes no sanctum 
+
+definindo abilities 
+
+  Na base de dados na tabela dos personal_acess_tokens tem uma coluna chamada  
+  "abilties" qua possui um array ['*'] quano arrasy tem apenas uma asterisco  
+  indica que esse token possui acesso geral, mas eu posso limitar ele colocando 
+  as abilities por exemplo:
+
+  ["clients:list","clients:update"]    
+
+  quem vai ler esse array e oe metodo que recebe ele por exemplo, esse if 
+  pega o usuario atenicado , depois chama a função tokenCan e consulta se dentro 
+  das abilities dele possui um indice com o valor "clients:list" se não tiver  
+  a api devolve um erro de acesso negado 
+ 
+
+  if(!auth()->user()->tokenCan(['clients:list'])){
+
+      return ApiResponse::error('Acesso negado');
+  }
+
+  Mas se ele tiver a rota manda a lista normalemente agora voltando ao exemplo da empresas 
+
+  Empresa 1
+   abilities['clients:list','clients:detail']
+   pode lista varios dados 
+   pode consultar os detalhes de um registro
+
+
+  Empresa 2    
+   abilities['clients:list','clients:detail','clients:add','clients:update']
+   pode lista varios dados 
+   pode consultar os detalhes de um registro
+   pode cadastrar novos dados 
+   atualizar registros
+
+
+
+
+  
+
