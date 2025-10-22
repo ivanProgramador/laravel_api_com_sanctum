@@ -1,0 +1,38 @@
+O stokens abilities tambem podem ser testados a nivel de rotas 
+mas pra isso e preciso criar um middleware adicionais para definir uma middleware 
+adicional eu tewnho que ir na pasta boostrap dentro do aruivo app.php tem uma função,
+que é feita parar estabelecer middlewares adcionais na inicialização do laravel, como eu preciso 
+criar esse middlewares eu vou colocar eles dentro dessa função  
+
+->withMiddleware(function (Middleware $middleware): void {
+        
+ })
+
+
+os middlewares que eu vou usar são forncecidos pelo sanctum por padrão   
+
+ ->withMiddleware(function (Middleware $middleware): void {
+
+      $middleware->alias([
+        'abilities' => CheckAbilities::class,
+        'ability' => CheckForAnyAbility::class,
+    ]);
+
+ })
+
+ Fazendo isso eu tenho 2 tipo de checagem 
+ 1 - abilities verifica se o token do usuarios possui todas as habilidades que pre-defini no token
+ 2 - ability verifica se ele tem a aabilidade especifica que eu peço pra autorizar oa cesso a rota 
+
+ nos dois  casos o teste acontece fora do metodo pra porteger não só os dados mas a rota em si, agora 
+ parara configrar isso eu preciso trazer as rotas que antes ficavam ocultas para dentro do arquivo api.php 
+ parar que consiga aplicar nelas 
+
+  Route::get('/clients',[ClientController::class,'index'])->middleware(['auth:sanctum','ability:clients:list']);
+  Route::post('/clients',[ClientController::class,'store'])->middleware(['auth:sanctum','ability:clients:create']);
+  Route::get('/clients/{client}',[ClientController::class,'show'])->middleware(['auth:sanctum','ability:clients:view']);
+  Route::put('/clients/{client}',[ClientController::class,'update'])->middleware(['auth:sanctum','ability:clients:update']);
+  Route::delete('/clients/{client}',[ClientController::class,'destroy'])->middleware(['auth:sanctum','ability:clients:delete']);    
+
+   
+
