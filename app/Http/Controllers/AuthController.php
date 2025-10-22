@@ -40,7 +40,7 @@ class AuthController extends Controller
         //se conseguir autenticar gera um token para o usuario
 
         $user = auth()->user();
-        $token = $user->createToken($user->name)->plainTextToken;
+        $token = $user->createToken($user->name, ["*"] ,now()->addHour())->plainTextToken;
          
         //retorna o token para o usuario
         

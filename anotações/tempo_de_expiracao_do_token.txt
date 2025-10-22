@@ -1,0 +1,26 @@
+Por padrão os tokens gerados pelo sanctun não tem uma data de validade 
+a menos que isso seja configurado. Existe um aquivo chamado "sanctum.php"
+ele tem uma lista de configurações e uma dela ea "expiration" por padrão 
+ela tem o valor null 
+
+'expiration' => null,
+
+se eu coloco 
+ 'expiration' => 1,
+
+o token gerado terá 1 minuto de validade, esse tempo é contado com base na data/hora que o token
+foi gerado. Definindo a duração dessa forma eu estou estabelencendo uma tempo fixo de validade 
+para todos os toekns gerados no sistema.
+
+Definindo a validade do token na hora do login, na função "createToken" além de gerar o token eu 
+posso definir os parametros, no caso eu estou deifinido 3 
+1 - os nome do usuario dono do token 
+2 - as habilities desse token 
+3 - o tempo de duração eu estou dizendo now() pra ele pegara a "data/hora" atual do servidor e 
+    adicionar 1 hora nesse tempo.   
+
+$token = $user->createToken($user->name, ["*"] ,now()->addHour())->plainTextToken;
+
+
+  
+
