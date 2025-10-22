@@ -91,7 +91,16 @@
     Usando o token para ter acesso a api quando se usa um sistema como insominia ou postman 
     tem um atributo de requisição chamado barrer é nesse campo que a chave da api é inserida 
     para ser envida na requisição como foi o sanctum quem gerou a chave ele vai deixar passar 
+    
+    No caso do insominia
+     
+     1 - acessa a barra auth 
+     2 - escolher a opção barrer token 
+     3 - colocar o token no campo 
 
+    No caso do thunder client 
+      1 - acessar a aba auth 
+      2 - na opção barrer ele ja deixa um campo pra colocar o token 
 
 
 

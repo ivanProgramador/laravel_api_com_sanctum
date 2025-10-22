@@ -17,3 +17,6 @@ Route::apiResource('clients', ClientController::class)->middleware('auth:sanctum
 
 //rota para login
 Route::post('/login', [AuthController::class, 'login']);
+
+//rota para logout
+Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');

@@ -1,0 +1,27 @@
+Para fazer o loginde um usuario da api o sanctnm usa o token que a minha api 
+esta creiando atraves de uma funcção de login, entra para fazer o logout é 
+preciso apagar esse token 
+
+para fazer isso foi criada uma rota post qua tambem é protegida pelo sanctnm
+
+Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
+
+
+Ela leva para o metodo logout, a linha abaixo pega os dados 
+do usuario que foi autenticado na requisição no model de usuario 
+eu disse que ele usaria token então eu posso usar a função tokens 
+pra decidir oque fazer com o token desse usuario, no caso eu escolhi 
+deletar.
+
+ $request->user()->tokens()->delete();
+
+abaixo tem o metodo completo que depois de pagar o token avisa ao usuario 
+que o logout foi feito com sucesso. 
+
+ public function logout(Request $request)
+     {
+        $request->user()->tokens()->delete();
+        return ApiResponse::success('logout feito com sucesso!');
+     }
+
+
