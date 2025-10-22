@@ -55,3 +55,15 @@ para acesso não autorizado
         );
       }
 
+Essa classe tem metodos que vão padronizar as respostas da minha API 
+no codigo abaixo eu mostra como ela pode ser usada no caso abaixo eu 
+no retorno da rota eu chamo o a classe  "ApiResponse" e chamo o metodo 
+"success" e passo pra ele o texto que eu quero que ele mostre.  
+
+Route::get('/status',function(){
+    return ApiResponse::success('Api funcionando');
+});
+
+como se trata de metdodos estaticos eu posso enviar qualquer texto 
+mas ele será exibido de forma padrão. Assim eu posso aplicar em qualquer 
+rota.    

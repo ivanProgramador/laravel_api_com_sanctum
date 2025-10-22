@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Client;
+use App\services\ApiResponse;
 use Illuminate\Http\Request;
 
 class ClientController extends Controller
@@ -15,7 +16,7 @@ class ClientController extends Controller
         //e depois faço um conversão para json e retorno o status 200
         //em uma linha so 
         
-        return response()->json(Client::all(), 200);
+        return ApiResponse::success(Client::all());
 
     }
 
@@ -40,22 +41,20 @@ class ClientController extends Controller
 
         $client = Client::create($request->all());
 
-        return response()->json([
-            'message' => 'cliente cadastrado com sucesso',
-            'data' => $client
-        ]);
+        return ApiResponse::success($client);
     }
 
    
     public function show(string $id)
     {
-        //mosttando um cliente especifico
+        //mostrando um cliente especifico
 
         $client = Client::find($id);
-        if (!$client) {
-            return response()->json(['message' => 'Cliente não encontrado'], 404);
+
+        if ($client) {
+            return ApiResponse::success($client);
         }else {
-            return response()->json($client, 200);
+            return ApiResponse::error("Cliente não encotrado");
         }
 
     }
@@ -77,16 +76,11 @@ class ClientController extends Controller
 
             $client->update($request->all());
 
-            return response()->json([
-                'message' => 'Cliente atualizado com sucesso',
-                'data' => $client
-            ], 200);
-
-           
+            return ApiResponse::success($client); 
 
         }else {
 
-             return response()->json(['message' => 'Cliente não encontrado'], 404);
+             return ApiResponse::error("Cliente não encontrado");
         }    
 
 
@@ -102,13 +96,9 @@ class ClientController extends Controller
 
         if($client){
             $client->delete();
-            return response()->json([
-                'message'=>'cliente deletado com sucesso'
-            ],200);
+            return ApiResponse::success('cliente deletado com sucesso');
         }else{
-             return response()->json([
-                'message'=>'cliente não econtrado'
-            ],404);
+             return ApiResponse::error('cliente não encontrado');
              
         }
     }
